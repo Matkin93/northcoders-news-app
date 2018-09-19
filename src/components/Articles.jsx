@@ -8,10 +8,8 @@ class Articles extends Component {
   }
 
   componentDidMount() {
-    console.log("HI <<<<<")
     if (this.props.filter === "all") this.fetchAllArticles()
     else {
-      console.log(this.props.match.params.topic)
       this.fetchArticlesByTopic(this.props.match.params.topic)
     }
   }

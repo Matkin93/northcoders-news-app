@@ -4,7 +4,8 @@ const ProfilePage = (props) => {
   const { user } = props;
   return (
     <div>
-      Hello {user.username}
+      <h2>Hello {user.name}</h2>
+      <p>Username: {user.username}</p>
       <img src={user.avatar_url} className="profile-page-img" />
     </div>
   );

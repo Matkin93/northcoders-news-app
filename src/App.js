@@ -23,7 +23,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <h1>Northcoders News</h1>
+        <h1 className="northcoders-news-title">Northcoders News</h1>
         {/* {Links to pages} */}
         <Link to="/users">Users</Link>
         <Link to="/articles">Articles</Link>
@@ -34,12 +34,12 @@ class App extends Component {
 
 
         {/* {Routes for Links} */}
-        <Route exact path="/" component={Articles} />
+        <Route exact path="/" render={() => <Articles filter="all" />} />
         <Route exact path="/articles" render={() => <Articles filter="all" />} />
         <Route exact path="/articles/topics/:topic" render={({ match }) => <Articles match={match} filter="topic" />} />
         <Route exact path="/articles/:article_id" render={({ match }) => <Article match={match} />} />
         <Route exact path="/users" component={Users} />
-        <Route path="/users/:username" render={({ match }) => <User match={match} />} />
+        <Route path="*/users/:username" render={({ match }) => <User match={match} />} />
         <Route path="/topics" component={TopicsBox} />
         <Route path="/profile" render={() => <ProfilePage user={this.state.currentUser} />} />
         <Route path="/login" component={Login} />

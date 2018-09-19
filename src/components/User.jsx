@@ -12,10 +12,11 @@ class User extends Component {
   }
 
   render() {
-    console.log(this.state.user)
     return (
       <div>
-        {this.state.user.name}
+        <h2>{this.state.user.username}</h2>
+        <p>Name: {this.state.user.name}</p>
+        <img src={this.state.user.avatar_url} />
       </div>
     );
   }
@@ -25,7 +26,7 @@ class User extends Component {
       .then(user => {
         const { userDoc } = user.data;
         this.setState({
-          user: userDoc
+          user: userDoc[0]
         })
       })
   }
