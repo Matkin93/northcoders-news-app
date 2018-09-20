@@ -20,30 +20,36 @@ class App extends Component {
       __v: 0
     }
   }
+
   render() {
     return (
       <div className="App">
-        <h1 className="northcoders-news-title">Northcoders News</h1>
-        {/* {Links to pages} */}
-        <Link to="/users">Users</Link>
-        <Link to="/articles">Articles</Link>
-        <Link to="/topics">Topics</Link>
-        <Link to="/profile">Profile</Link>
-        <Link to="/login">Login</Link>
-        <Link to="/signup">SignUp</Link>
-
+        <div className="header-unit">
+          <h1 className="northcoders-news-title"> <img src="./resources/images/northcoders-logo.png" className="northcoders-logo" alt="Northcoders Logo" /><div className="news-outer">( <span className="news-inner">news</span> )</div></h1>
+          {/* {Links to pages} */}
+          <div className="top-links">
+            <Link to="/users">Users</Link>
+            <Link to="/articles">Articles</Link>
+            <Link to="/topics">Topics</Link>
+            <Link to="/profile">Profile</Link>
+            <Link to="/login">Login</Link>
+            <Link to="/signup">SignUp</Link>
+          </div>
+        </div>
 
         {/* {Routes for Links} */}
-        <Route exact path="/" render={() => <Articles filter="all" />} />
-        <Route exact path="/articles" render={() => <Articles filter="all" />} />
-        <Route exact path="/articles/topics/:topic" render={({ match }) => <Articles match={match} filter="topic" />} />
-        <Route exact path="/articles/:article_id" render={({ match }) => <Article match={match} />} />
-        <Route exact path="/users" component={Users} />
-        <Route path="*/users/:username" render={({ match }) => <User match={match} />} />
-        <Route path="/topics" component={TopicsBox} />
-        <Route path="/profile" render={() => <ProfilePage user={this.state.currentUser} />} />
-        <Route path="/login" component={Login} />
-        <Route path="/signup" component={SignUp} />
+        <div className="main-content">
+          <Route exact path="/" render={() => <Articles filter="all" />} />
+          <Route exact path="/articles" render={() => <Articles filter="all" />} />
+          <Route exact path="/articles/topics/:topic" render={({ match }) => <Articles match={match} filter="topic" />} />
+          <Route exact path="/articles/:article_id" render={({ match }) => <Article match={match} />} />
+          <Route exact path="/users" component={Users} />
+          <Route path="*/users/:username" render={({ match }) => <User match={match} />} />
+          <Route path="/topics" component={TopicsBox} />
+          <Route path="/profile" render={() => <ProfilePage user={this.state.currentUser} />} />
+          <Route path="/login" component={Login} />
+          <Route path="/signup" component={SignUp} />
+        </div>
       </div>
     );
   }

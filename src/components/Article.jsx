@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import Comments from './Comments';
-import VoteButton from './VoteButton';
+// import VoteButton from './VoteButton';
 import * as api from '../api'
 import { Link } from 'react-router-dom';
 

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import * as api from '../api';
+import PropTypes from 'prop-types';
 
 class User extends Component {
   state = {
@@ -16,7 +17,7 @@ class User extends Component {
       <div>
         <h2>{this.state.user.username}</h2>
         <p>Name: {this.state.user.name}</p>
-        <img src={this.state.user.avatar_url} />
+        <img src={this.state.user.avatar_url} alt="user-avatar" />
       </div>
     );
   }
@@ -30,6 +31,10 @@ class User extends Component {
         })
       })
   }
+}
+
+User.propTypes = {
+  match: PropTypes.object
 }
 
 export default User;

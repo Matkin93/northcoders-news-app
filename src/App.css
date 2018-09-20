@@ -29,15 +29,26 @@
 
 li {
   list-style: none;
+  margin: 5px;
+}
+
+ul {
   margin: 10px;
+  padding: 10px;
 }
 
 body {
-  background-color: rgb(95, 95, 95);
+  background-color: rgb(224, 224, 224);
 }
 
 .northcoders-news-title {
+  display: flex;
   color: azure;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-family: 'Menlo';
+  font-size: 40px;
 }
 
 a {
@@ -46,5 +57,87 @@ a {
 }
 
 a:hover {
-  color: rgba(201, 3, 3, 0.753);
+  color: rgb(201, 0, 40);
+}
+
+.main-content {
+  display: flex;
+  justify-content: center;
+}
+
+.article-headline {
+  display: flex;
+  font-size: 20px;
+}
+
+.articles-list {
+ display: flex;
+}
+
+.article-preview {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 15px;
+  border-radius: 5px;
+  background-color: rgb(151, 151, 151);
+  padding: 10px;
+  width: 60%;
+}
+
+.comments-count-created-by {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.comment-count {
+  display: flex;
+}
+
+.created-by {
+  display: flex;
+}
+
+.body-preview {
+  text-align: start;
+  padding: 10px;
+}
+
+.header-unit {
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  background-color: rgb(151, 151, 151);
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.top-links {
+  position: sticky;
+  display: flex;
+  justify-content: space-evenly;
+  margin: 10px 0px;
+  font-size: 20px;
+}
+
+.northcoders-logo {
+  height: 92.53px;
+  width: 417.89px;
+}
+
+.northcoders-logo:hover {
+  cursor: pointer;
+}
+
+.news-outer {
+  margin: 25px 0px 0px 0px;
+}
+
+.news-inner {
+  color: rgb(253, 253, 100);
+}
+
+.posted-date {
+  color: rgb(253, 253, 100);
 }
