@@ -25,18 +25,26 @@ class App extends Component {
     return (
       <div className="App">
         <div className="header-unit">
-          <h1 className="northcoders-news-title"> <img src="./resources/images/northcoders-logo.png" className="northcoders-logo" alt="Northcoders Logo" /><div className="news-outer">( <span className="news-inner">news</span> )</div></h1>
+          <h1 className="northcoders-news-title"> <a href="https://northcoders.com/"><img src="./resources/images/northcoders-logo.png" className="northcoders-logo" alt="Northcoders Logo" /></a><div className="news-outer">( <span className="news-inner">news</span> )</div></h1>
           {/* {Links to pages} */}
           <div className="top-links">
-            <Link to="/users">Users</Link>
-            <Link to="/articles">Articles</Link>
-            <Link to="/topics">Topics</Link>
-            <Link to="/profile">Profile</Link>
-            <Link to="/login">Login</Link>
-            <Link to="/signup">SignUp</Link>
+            <div className="header-link">
+              <Link to="/users">Users</Link>
+            </div>
+            <div className="header-link">
+              <Link to="/articles">Articles</Link>
+            </div>
+            <div className="header-link">
+              <Link to="/topics">Topics</Link>
+            </div>
+            <div className="header-link">
+              <i className="material-icons">person_outline</i>
+              {this.state.currentUser._id && <Link to="/profile">{this.state.currentUser.username}</Link>}
+            </div>
+            {!this.state.currentUser._id && <div className="header-link"><Link to="/login">Login</Link></div>}
+            {!this.state.currentUser._id && <div className="header-link"><Link to="/signup">SignUp</Link></div>}
           </div>
         </div>
-
         {/* {Routes for Links} */}
         <div className="main-content">
           <Route exact path="/" render={() => <Articles filter="all" />} />
@@ -49,10 +57,17 @@ class App extends Component {
           <Route path="/profile" render={() => <ProfilePage user={this.state.currentUser} />} />
           <Route path="/login" component={Login} />
           <Route path="/signup" component={SignUp} />
+          <Route path="/404" component={Error404} />
         </div>
       </div>
     );
   }
+}
+
+function Error404(props) {
+  return <div className="page404">
+    <h1>404: Page Not Found</h1>
+  </div>
 }
 
 export default App;

@@ -38,7 +38,7 @@ ul {
 }
 
 body {
-  background-color: rgb(224, 224, 224);
+  background-color: rgb(240, 240, 240);
 }
 
 .northcoders-news-title {
@@ -49,6 +49,7 @@ body {
   color: white;
   font-family: 'Menlo';
   font-size: 40px;
+  border-bottom: 1px solid rgba(87, 75, 75, 0.829);
 }
 
 a {
@@ -68,21 +69,28 @@ a:hover {
 .article-headline {
   display: flex;
   font-size: 20px;
+  margin: 5px 0px 0px 0px;
 }
 
 .articles-list {
  display: flex;
+ margin: 128px 0px 0px 50px;
 }
 
 .article-preview {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin: 15px;
+  margin: 5px 10px;
   border-radius: 5px;
   background-color: rgb(151, 151, 151);
   padding: 10px;
-  width: 60%;
+  width: 65%;
+  border: 1px solid rgba(87, 75, 75, 0.829);
+}
+
+.article-preview:hover {
+  border: 1px solid rgb(201, 201, 201);
 }
 
 .comments-count-created-by {
@@ -107,18 +115,20 @@ a:hover {
 .header-unit {
   display: flex;
   flex-direction: column;
-  position: sticky;
+  position: fixed;
+  width: 100%;
   background-color: rgb(151, 151, 151);
   border-bottom-right-radius: 5px;
   border-bottom-left-radius: 5px;
+  border-bottom: 1px solid rgba(87, 75, 75, 0.829);
 }
 
 .top-links {
-  position: sticky;
   display: flex;
   justify-content: space-evenly;
-  margin: 10px 0px;
-  font-size: 20px;
+  padding: 4px 0px;
+  font-size: 17px;
+  background-color: rgb(177, 177, 177)
 }
 
 .northcoders-logo {
@@ -131,7 +141,7 @@ a:hover {
 }
 
 .news-outer {
-  margin: 25px 0px 0px 0px;
+  margin: 18px 0px 0px 0px;
 }
 
 .news-inner {
@@ -140,4 +150,161 @@ a:hover {
 
 .posted-date {
   color: rgb(253, 253, 100);
+  font-family: 'Menlo';
+  font-size: 12px;
+  margin: 3px 0px 0px 0px
+}
+
+.belongs-to {
+  display: flex;
+  align-self: center;
+  width: 100%
+}
+
+h1 {
+  margin: 5px 0px 0px 0px;
+}
+
+.article-box {
+  display: flex;
+}
+
+.article-box-voting {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(151, 151, 151);
+  border-radius: 5px;
+  margin: 5px 0px;
+  height: 100px;
+  justify-content: center;
+  padding: 5px;
+  border: 1px solid rgba(87, 75, 75, 0.829);
+}
+
+ .material-icons {
+  font-weight: 1000;
+} 
+
+.vote-button-up {
+  color: rgba(82, 82, 82, 0.726);
+  transition-duration: 0.25s;
+}
+
+.vote-button-up:hover {
+  cursor: pointer;
+  color: rgb(0, 221, 0);
+}
+
+.vote-button-up:active {
+  transform: scale(1.5);
+  transition-duration: 0.05s;
+}
+.vote-button-up:disabled {
+  color: rgb(0, 221, 0);
+  transform: none;
+  transition-duration: 0s;
+}
+
+.vote-button-down {
+  color: rgba(82, 82, 82, 0.726);
+  transition-duration: 0.25s;
+}
+
+.vote-button-down:hover {
+  cursor: pointer;
+  color: red;
+}
+
+.vote-button-down:active {
+  transform: scale(1.5);
+  transition-duration: 0.05s;
+}
+
+.vote-button-down:disabled {
+  color: red;
+  transform: none;
+  transition-duration: 0s;
+}
+
+.article-box-link {
+  text-decoration: none;
+  color: black;
+}
+
+.article-box-link:hover {
+  color:black;
+}
+
+.article-main-container {
+  display: flex;
+  padding-top: 175px;
+}
+
+.article-main {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  min-width: 400px;
+  background-color: rgb(151, 151, 151);
+  margin: auto;
+  border-radius: 5px;
+  border: 1px solid rgba(87, 75, 75, 0.829);
+  align-items: flex-start;
+  padding: 10px;
+}
+
+.page404 {
+  display: flex;
+  background-color: rgb(151, 151, 151);
+  border: 1px solid rgba(87, 75, 75, 0.829);
+  margin: 135px 0px 0px 0px;
+}
+
+.loading {
+
+  display: flex;
+  background-color: rgb(151, 151, 151);
+  border: 1px solid rgba(87, 75, 75, 0.829);
+  border-radius: 5px;
+  padding: 20px;
+  margin: 200px 0px 0px 0px;
+
+}
+
+.comment-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.comment-box {
+  display: flex;
+  width: 500px;
+  flex-direction: column;
+  align-items: flex-start;
+  background-color: rgb(151, 151, 151);
+  border: 1px solid rgba(87, 75, 75, 0.829);
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px
+}
+
+button {
+  display: flex;
+  background-color: rgb(151, 151, 151);
+  border: none;
+  padding: 0px;
+  margin: 0px;
+}
+
+.article-body {
+  text-align: left;
+}
+
+.header-link {
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+  align-content: center;
+  align-items: center;
 }

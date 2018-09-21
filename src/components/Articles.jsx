@@ -2,10 +2,13 @@ import React, { Component } from 'react';
 import * as api from '../api';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
+import VoteButton from './VoteButton';
 
 class Articles extends Component {
   state = {
-    articles: []
+    articles: [],
+    // downVotedArticles: [],
+    // upVotedArticles: []
   }
 
   componentDidMount() {
@@ -31,21 +34,28 @@ class Articles extends Component {
     return (
       <div className="articles-list">
         <ul>
-          {sortedArticles.map(article => {
+          {sortedArticles.map((article, i) => {
+
             let upperCaseTopic = article.belongs_to.split('')
             upperCaseTopic[0] = upperCaseTopic[0].toUpperCase();
 
-            return <div key={article._id} className="article-preview">
-              <div className="belongs-to">{upperCaseTopic}</div>
-              <li className="article-headline">
-                <Link to={`/articles/${article._id}`}>
-                  {article.title}
-                </Link>
-              </li>
-              <div className="body-preview">
-                {article.body.split('.')[0]}.{article.body.split('.')[1]}...
+            return <div key={article._id} className="article-box">
+              <div className="article-preview" >
+                <div className="belongs-to">{upperCaseTopic}</div>
+                <li className="article-headline">
+                  <Link to={`/articles/${article._id}`}>
+                    {'{ ' + article.title + ' }'}
+                  </Link>
+                </li>
+                <div className="body-preview">
+                  {article.body.split('.')[0]}.{article.body.split('.')[1]}...
               </div>
-              <div className="comments-count-created-by"><div className="comment-count">{article.comment_count} Comments </div><div className="created-by">Created by: {article.created_by.username}  ( <div className="posted-date"> {' '} {moment(article.created_at).fromNow()} </div> )</div></div>
+                <div className="comments-count-created-by"><div className="comment-count">{article.comment_count} Comments </div><div className="created-by">Posted by: <Link to={`users/${article.created_by.username}`}>
+                  {article.created_by.username} </Link> ( <div className="posted-date"> {moment(article.created_at).fromNow()} </div> )</div></div>
+              </div>
+              <div className="article-box-voting">
+                <VoteButton article={article} />
+              </div>
             </div>
           })}
         </ul>
@@ -75,7 +85,18 @@ class Articles extends Component {
     })
   }
 
-
+  voteArticle = (articleId, vote) => {
+    api.voteArticle(articleId, vote).then((res) => {
+      const updateDownVotedArticles = [...this.state.downVotedArticles];
+      const updateUpVotedArticles = [...this.state.upVotedArticles];
+      if (vote === 'up') updateUpVotedArticles.push(articleId);
+      else updateDownVotedArticles.push(articleId);
+      this.setState({
+        upVotedArticles: updateUpVotedArticles,
+        downVotedArticles: updateDownVotedArticles
+      }, () => { console.log(this.state) })
+    })
+  }
 }
 
 export default Articles;

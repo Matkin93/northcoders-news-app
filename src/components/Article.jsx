@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
-// import VoteButton from './VoteButton';
+import VoteButton from './VoteButton';
 import * as api from '../api'
 import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom'
 
 class Article extends Component {
   state = {
-    article: [],
-    comments: []
+    article: {},
+    comments: [],
+    err: null,
+    loading: true
   }
 
   componentDidMount() {
@@ -16,23 +19,45 @@ class Article extends Component {
   }
 
   render() {
-    return (
-      <div className="article-main">
-        <h2>{this.state.article.title}</h2>
-        <p>{this.state.article.body}</p>
-        <h3>Comments:</h3>
-        <ul>
-          {this.state.comments.map(comment => {
-            return <div key={comment._id}>
-              <Link to={`users/${comment.created_by.username}`}>
-                {comment.created_by.username}
-              </Link>
-              <li>
-                {comment.body}
-              </li>
-            </div>
-          })}
-        </ul>
+    const { err, article, comments, loading } = this.state;
+    if (err) return <Redirect to={{
+      pathname: "/404",
+      state: {
+        sendTo: `/articles`
+      }
+    }} />
+    let upperCaseTopic = '';
+    if (article.belongs_to) {
+      let splitTopic = article.belongs_to.split('')
+      splitTopic[0] = splitTopic[0].toUpperCase();
+      upperCaseTopic = splitTopic.join('')
+    }
+    if (loading) return <div className="loading">Loading article...</div>
+    else return (
+      <div className="article-main-container">
+        <div >
+          <div className="article-main">
+            {upperCaseTopic && <div>{upperCaseTopic}</div>}
+            <h2 className="article-headline">{article.title}</h2>
+            <p className="article-body">{article.body}</p>
+            <VoteButton article={article} />
+          </div>
+          <h3>Comments:</h3>
+          <ul>
+            {comments.map(comment => {
+              return <div key={comment._id} className="comment-container">
+                <div className="comment-box">
+                  <Link to={`users/${comment.created_by.username}`} className="comment-username">
+                    {comment.created_by.username}
+                  </Link>
+                  <li className="comment-body">
+                    {comment.body}
+                  </li>
+                </div>
+              </div>
+            })}
+          </ul>
+        </div>
       </div>
     );
   }
@@ -44,7 +69,7 @@ class Article extends Component {
         this.setState({
           article: articleDoc
         })
-      })
+      }).catch((err) => this.setState({ err }))
   }
 
   fetchArticleComments = (article_id) => {
@@ -52,7 +77,8 @@ class Article extends Component {
       .then(comments => {
         const { commentDocs } = comments.data;
         this.setState({
-          comments: commentDocs
+          comments: commentDocs,
+          loading: false
         })
       })
   }
