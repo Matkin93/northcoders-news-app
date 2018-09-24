@@ -1,13 +1,17 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const ProfilePage = (props) => {
   if (typeof props.user === 'object') {
-    const { user } = props;
+    const { user, logOut } = props;
     return (
-      <div>
-        <h2>Hello {user.name}</h2>
-        <p>Username: {user.username}</p>
-        <img src={user.avatar_url} alt="user-avatar" className="profile-page-img" />
+      <div className="user-profile-container">
+        <img src={user.avatar_url} alt="user-avatar" className="user-profile-avatar" />
+        <h2 className="user-profile-username">{user.username}</h2>
+        <p className="user-profiel-name">Hello {user.name}!</p>
+        <button className="logout-button" onClick={logOut}><Link to={`/articles`}>
+          Log Out</Link>
+        </button>
       </div>
     );
   } else {

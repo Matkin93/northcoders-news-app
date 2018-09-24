@@ -14,6 +14,11 @@ class TopicsBox extends Component {
   render() {
     return (
       <div>
+        <li key='all'>
+          <Link to={`/articles`}>
+            All
+            </Link>
+        </li>
         {this.state.topics.map(topic => {
           return <li key={topic._id}>
             <Link to={`/articles/topics/${topic.slug}`}>

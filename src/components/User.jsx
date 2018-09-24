@@ -14,10 +14,10 @@ class User extends Component {
 
   render() {
     return (
-      <div>
-        <h2>{this.state.user.username}</h2>
-        <p>Name: {this.state.user.name}</p>
-        <img src={this.state.user.avatar_url} alt="user-avatar" />
+      <div className="user-profile-container">
+        <img src={this.state.user.avatar_url} alt="user-avatar" className="user-profile-avatar" />
+        <h2 className="user-profile-username">{this.state.user.username}</h2>
+        <p className="user-profiel-name">Name: {this.state.user.name}</p>
       </div>
     );
   }

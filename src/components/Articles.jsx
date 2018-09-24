@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import * as api from '../api';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import moment from 'moment';
 import VoteButton from './VoteButton';
+import TopicsBox from './TopicsBox';
 
 class Articles extends Component {
   state = {
     articles: [],
-    // downVotedArticles: [],
-    // upVotedArticles: []
+    err: null
   }
 
   componentDidMount() {
@@ -25,14 +25,22 @@ class Articles extends Component {
   }
 
   render() {
-    const sortedArticleIndexes = this.state.articles.map(article => new Date(article.created_at).getTime());
+    const { articles, err } = this.state;
+    const sortedArticleIndexes = articles.map(article => new Date(article.created_at).getTime());
     sortedArticleIndexes.sort((a, b) => b - a)
     const sortedArticles = [];
-    this.state.articles.forEach(article => {
+    articles.forEach(article => {
       sortedArticles[sortedArticleIndexes.indexOf(new Date(article.created_at).getTime())] = article
     })
+    if (err) return <Redirect to={{
+      pathname: "/404",
+      state: {
+        sendTo: `/articles`
+      }
+    }} />
     return (
       <div className="articles-list">
+        {/* <div>{this.props.filter}</div> */}
         <ul>
           {sortedArticles.map((article, i) => {
 
@@ -51,7 +59,7 @@ class Articles extends Component {
                   {article.body.split('.')[0]}.{article.body.split('.')[1]}...
               </div>
                 <div className="comments-count-created-by"><div className="comment-count">{article.comment_count} Comments </div><div className="created-by">Posted by: <Link to={`users/${article.created_by.username}`}>
-                  {article.created_by.username} </Link> ( <div className="posted-date"> {moment(article.created_at).fromNow()} </div> )</div></div>
+                  {` ` + article.created_by.username} </Link> ( <div className="posted-date"> {moment(article.created_at).fromNow()} </div> )</div></div>
               </div>
               <div className="article-box-voting">
                 <VoteButton article={article} />
@@ -59,6 +67,10 @@ class Articles extends Component {
             </div>
           })}
         </ul>
+        <div className="side-box">
+          <div>Topics</div>
+          <TopicsBox />
+        </div>
       </div>
     );
   }
@@ -82,20 +94,11 @@ class Articles extends Component {
           articles: articlesWithCommentCount
         })
       }
-    })
+    }).catch((err) => this.setState({ err }))
   }
 
   voteArticle = (articleId, vote) => {
-    api.voteArticle(articleId, vote).then((res) => {
-      const updateDownVotedArticles = [...this.state.downVotedArticles];
-      const updateUpVotedArticles = [...this.state.upVotedArticles];
-      if (vote === 'up') updateUpVotedArticles.push(articleId);
-      else updateDownVotedArticles.push(articleId);
-      this.setState({
-        upVotedArticles: updateUpVotedArticles,
-        downVotedArticles: updateDownVotedArticles
-      }, () => { console.log(this.state) })
-    })
+    api.voteArticle(articleId, vote)
   }
 }
 

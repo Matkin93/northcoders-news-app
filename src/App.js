@@ -9,6 +9,8 @@ import Users from './components/Users';
 import ProfilePage from './components/ProfilePage';
 import Article from './components/Article';
 import User from './components/User';
+import logo from './assets/northcoders-logo.png';
+// import * as api from './api';
 
 class App extends Component {
   state = {
@@ -22,27 +24,19 @@ class App extends Component {
   }
 
   render() {
+    const { username, _id } = this.state.currentUser;
     return (
       <div className="App">
         <div className="header-unit">
-          <h1 className="northcoders-news-title"> <a href="https://northcoders.com/"><img src="./resources/images/northcoders-logo.png" className="northcoders-logo" alt="Northcoders Logo" /></a><div className="news-outer">( <span className="news-inner">news</span> )</div></h1>
+          <h1 className="northcoders-news-title"> <Link to="/articles"><img src={logo} className="northcoders-logo" alt="Northcoders Logo" /></Link><div className="news-outer">( <span className="news-inner">news</span> )</div></h1>
           {/* {Links to pages} */}
           <div className="top-links">
-            <div className="header-link">
-              <Link to="/users">Users</Link>
-            </div>
-            <div className="header-link">
-              <Link to="/articles">Articles</Link>
-            </div>
-            <div className="header-link">
-              <Link to="/topics">Topics</Link>
-            </div>
-            <div className="header-link">
+            {username && <div className="header-link">
               <i className="material-icons">person_outline</i>
-              {this.state.currentUser._id && <Link to="/profile">{this.state.currentUser.username}</Link>}
-            </div>
-            {!this.state.currentUser._id && <div className="header-link"><Link to="/login">Login</Link></div>}
-            {!this.state.currentUser._id && <div className="header-link"><Link to="/signup">SignUp</Link></div>}
+              {_id && <Link to="/profile">{username}</Link>}
+            </div>}
+            {!_id && <div className="header-link"><Link to="/login">Login</Link></div>}
+            {!_id && <div className="header-link"><Link to="/signup">SignUp</Link></div>}
           </div>
         </div>
         {/* {Routes for Links} */}
@@ -50,17 +44,32 @@ class App extends Component {
           <Route exact path="/" render={() => <Articles filter="all" />} />
           <Route exact path="/articles" render={() => <Articles filter="all" />} />
           <Route exact path="/articles/topics/:topic" render={({ match }) => <Articles match={match} filter="topic" />} />
-          <Route exact path="/articles/:article_id" render={({ match }) => <Article match={match} />} />
+          <Route exact path="/articles/:article_id" render={({ match }) => <Article match={match} user={_id} />} />
           <Route exact path="/users" component={Users} />
           <Route path="*/users/:username" render={({ match }) => <User match={match} />} />
           <Route path="/topics" component={TopicsBox} />
-          <Route path="/profile" render={() => <ProfilePage user={this.state.currentUser} />} />
+          <Route path="/profile" render={() => <ProfilePage user={this.state.currentUser} logOut={this.logOut} />} />
           <Route path="/login" component={Login} />
           <Route path="/signup" component={SignUp} />
           <Route path="/404" component={Error404} />
         </div>
       </div>
     );
+  }
+
+  logIn = (e) => {
+    // api.getUserByUsername()
+    this.setState({
+      currentUser: {
+
+      }
+    })
+  }
+
+  logOut = () => {
+    this.setState({
+      currentUser: {}
+    })
   }
 }
 
