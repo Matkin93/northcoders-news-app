@@ -10,7 +10,6 @@ import ProfilePage from './components/ProfilePage';
 import Article from './components/Article';
 import User from './components/User';
 import logo from './assets/northcoders-logo.png';
-// import * as api from './api';
 
 class App extends Component {
   state = {
@@ -49,7 +48,8 @@ class App extends Component {
           <Route path="*/users/:username" render={({ match }) => <User match={match} />} />
           <Route path="/topics" component={TopicsBox} />
           <Route path="/profile" render={() => <ProfilePage user={this.state.currentUser} logOut={this.logOut} />} />
-          <Route path="/login" component={Login} />
+          <Route path="/login" render={!this.state.currentUser.username ? () => <Login logIn={this.logIn} /> : () => <Articles filter="all" />} />
+          {/* <Route path="/login" render={() => <Login logIn={this.logIn} />} /> */}
           <Route path="/signup" component={SignUp} />
           <Route path="/404" component={Error404} />
         </div>
@@ -57,12 +57,12 @@ class App extends Component {
     );
   }
 
-  logIn = (e) => {
-    // api.getUserByUsername()
+  logIn = (user) => {
     this.setState({
-      currentUser: {
+      currentUser: user[0]
+    }, () => {
 
-      }
+
     })
   }
 

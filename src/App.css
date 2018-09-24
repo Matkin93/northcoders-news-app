@@ -441,16 +441,22 @@ textarea {
 .login-box {
   display: flex; 
   flex-direction: column;
+  align-content: center;
+  align-items: center;
   margin-top: 150px;
   border: 1px solid rgba(87, 75, 75, 0.829);
   border-radius: 5px;
   background-color: rgb(151, 151, 151);
   padding: 25px;
+  width: 250px;
+  height: 250px;
 }
 
 .login-inputs {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  width: 150px;
 }
 
 .login-items {
@@ -478,4 +484,36 @@ textarea {
   display: flex;
   margin: 10px;
   padding: 10px;
+}
+
+.login-button {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  font-size: 15px;
+  background-color: rgb(177, 177, 177);
+  color: black;
+  padding: 7px;
+  border-radius: 5px;
+  margin: 5px;
+  width: 75px;
+  border: 1px solid rgba(87, 75, 75, 0.829);
+}
+
+.login-button:hover {
+  align-items: center;
+  display: flex;
+  font-size: 15px;
+  background-color: rgba(87, 75, 75, 0.829);
+  color: black;
+  padding: 7px;
+  border-radius: 5px;
+  margin: 5px;
+  border: 1px solid rgb(177, 177, 177);
+}
+
+.invalid-username-password {
+  display: flex;
+  font-size: 10px;
+  color: red;
 }

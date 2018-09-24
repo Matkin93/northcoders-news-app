@@ -18,6 +18,7 @@ export const voteArticle = async (articleId, vote) => axios.patch(`${DB_URL}/art
 export const getAllUsers = async () => axios.get(`${DB_URL}/users`)
 
 export const getUserByUsername = async (username) => axios.get(`${DB_URL}/users/${username}`)
+  .catch(err => { throw err })
 
 //Topics api request functions
 
