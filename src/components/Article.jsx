@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import VoteButton from './VoteButton';
 import * as api from '../api'
-import { Link } from 'react-router-dom';
 import { Redirect } from 'react-router-dom'
 import AddComment from './AddComment';
+import CommentsList from './CommentsList';
+import FullArticleCard from './FullArticleCard';
 
 class Article extends Component {
   state = {
@@ -43,40 +43,14 @@ class Article extends Component {
     if (loadingArticle) return <div className="loading">Loading article...</div>
     else return (
       <div className="article-main-container">
-        <div >
-          <div className="article-main">
-            {upperCaseTopic && <div>{upperCaseTopic}</div>}
-            <h2 className="article-headline-single">{article.title}</h2>
-            <p className="article-body">{article.body}</p>
-            <div className="bottom-of-article">
-              <div className="vote-buttons"><VoteButton article={article} /></div>
-              <div className="article-username">Posted by: <Link to={`users/${this.state.article.created_by.username}`}>{" " + this.state.article.created_by.username}</Link></div>
-            </div>
+        <FullArticleCard upperCaseTopic={upperCaseTopic} article={this.state.article} />
+        {loadingComments || loadingArticle ? <div className="loading">Loading Comments</div> : <div>
+          <div>
+            <AddComment articleId={article._id} userId={this.props.user} username={this.props.username} addCommentToState={this.addCommentToState} />
           </div>
-          <h3>Comments:</h3>
-          {loadingComments || loadingArticle ? <div className="loading">Loading Comments</div> : <div>
-            <div>
-              <AddComment articleId={article._id} userId={this.props.user} addCommentToState={this.addCommentToState} />
-            </div>
-            <ul>
-              {sortedComments.map(comment => {
-                return <div key={comment._id} className="comment-container">
-                  <div className="comment-box">
-                    <Link to={`users/${comment.created_by.username}`} className="comment-username">
-                      {comment.created_by.username}
-                    </Link>
-
-                    <p className="comment-body">
-                      {comment.body}
-                    </p>
-                    {this.props.user === comment.created_by._id && <button className="delete-comment-button" onClick={() => this.deleteComment(comment._id)}>Delete</button>}
-                  </div>
-                </div>
-              })}
-            </ul>
-          </div>
-          }
+          <CommentsList sortedComments={sortedComments} deleteComment={this.deleteComment} user={this.props.user} />
         </div>
+        }
       </div>
     );
   }

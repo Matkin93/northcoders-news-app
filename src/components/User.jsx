@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import * as api from '../api';
 import PropTypes from 'prop-types';
+import profileImg from '../assets/default-user.png'
 
 class User extends Component {
   state = {
@@ -13,11 +14,13 @@ class User extends Component {
   }
 
   render() {
+    const { avatar_url, username, name } = this.state.user;
+    console.log(avatar_url);
     return (
       <div className="user-profile-container">
-        <img src={this.state.user.avatar_url} alt="user-avatar" className="user-profile-avatar" />
-        <h2 className="user-profile-username">{this.state.user.username}</h2>
-        <p className="user-profiel-name">Name: {this.state.user.name}</p>
+        <img src={avatar_url} alt="user-avatar" className="user-profile-avatar" onError={(e) => { e.target.src = profileImg }} />
+        <h2 className="user-profile-username">{username}</h2>
+        <p className="user-profiel-name">Name: {name}</p>
       </div>
     );
   }

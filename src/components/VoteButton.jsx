@@ -13,17 +13,17 @@ class VoteButton extends Component {
     else if (article.votes > 0) numberColour = 'rgb(0, 221, 0)'
     else numberColour = 'grey';
     return (
-      <div>
-        <button className="vote-button-up" disabled={this.state.voteChange === 1} onClick={() => this.voteArticle(_id, 'up')}>
-          <i className="material-icons">arrow_upward</i>
+      <span className="vote-component">
+        <button disabled={this.state.voteChange === 1} onClick={() => this.voteArticle(_id, 'up')}>
+          <i className="material-icons up-arrow" disabled={this.state.voteChange === 1}>arrow_upward</i>
         </button>
-        <div style={{ color: numberColour }}>
+        <span style={{ color: numberColour }} className="vote-count">
           {votes + this.state.voteChange}
-        </div>
-        <button className="vote-button-down" disabled={this.state.voteChange === -1} onClick={() => this.voteArticle(_id, 'down')}>
-          <i className="material-icons">arrow_downward</i>
+        </span>
+        <button disabled={this.state.voteChange === -1} onClick={() => this.voteArticle(_id, 'down')}>
+          <i className="material-icons down-arrow" disabled={this.state.voteChange === -1}>arrow_downward</i>
         </button>
-      </div>
+      </span>
     );
   }
 
@@ -34,7 +34,7 @@ class VoteButton extends Component {
       else voteDirection--;
       this.setState({
         voteChange: voteDirection
-      }, () => { console.log(this.state) })
+      })
     })
   }
 }

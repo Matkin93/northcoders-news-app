@@ -3,15 +3,19 @@ import * as api from '../api';
 import { Link, Redirect } from 'react-router-dom';
 import moment from 'moment';
 import VoteButton from './VoteButton';
-import TopicsBox from './TopicsBox';
+import SideBox from './SideBox';
+import ArticleCard from './ArticleCard';
 
 class Articles extends Component {
   state = {
     articles: [],
-    err: null
+    topics: [],
+    err: null,
+    loadingArticles: true
   }
 
   componentDidMount() {
+    this.fetchTopics();
     if (this.props.filter === "all") this.fetchAllArticles()
     else {
       this.fetchArticlesByTopic(this.props.match.params.topic)
@@ -25,7 +29,7 @@ class Articles extends Component {
   }
 
   render() {
-    const { articles, err } = this.state;
+    const { articles, err, loadingArticles, topics } = this.state;
     const sortedArticleIndexes = articles.map(article => new Date(article.created_at).getTime());
     sortedArticleIndexes.sort((a, b) => b - a)
     const sortedArticles = [];
@@ -38,39 +42,15 @@ class Articles extends Component {
         sendTo: `/articles`
       }
     }} />
-    return (
-      <div className="articles-list">
-        {/* <div>{this.props.filter}</div> */}
-        <ul>
+    if (loadingArticles) return <div className="loading">Loading articles...</div>
+    else return (
+      <div className="article-page">
+        <div className="articles-list">
           {sortedArticles.map((article, i) => {
-
-            let upperCaseTopic = article.belongs_to.split('')
-            upperCaseTopic[0] = upperCaseTopic[0].toUpperCase();
-
-            return <div key={article._id} className="article-box">
-              <div className="article-preview" >
-                <div className="belongs-to">{upperCaseTopic}</div>
-                <li className="article-headline">
-                  <Link to={`/articles/${article._id}`}>
-                    {'{ ' + article.title + ' }'}
-                  </Link>
-                </li>
-                <div className="body-preview">
-                  {article.body.split('.')[0]}.{article.body.split('.')[1]}...
-              </div>
-                <div className="comments-count-created-by"><div className="comment-count">{article.comment_count} Comments </div><div className="created-by">Posted by: <Link to={`users/${article.created_by.username}`}>
-                  {` ` + article.created_by.username} </Link> ( <div className="posted-date"> {moment(article.created_at).fromNow()} </div> )</div></div>
-              </div>
-              <div className="article-box-voting">
-                <VoteButton article={article} />
-              </div>
-            </div>
+            return <ArticleCard article={article} key={article._id} />
           })}
-        </ul>
-        <div className="side-box">
-          <div>Topics</div>
-          <TopicsBox />
         </div>
+        <SideBox topics={topics} />
       </div>
     );
   }
@@ -80,7 +60,8 @@ class Articles extends Component {
       const { articlesWithCommentCount } = articles.data;
       if (articlesWithCommentCount) {
         this.setState({
-          articles: articlesWithCommentCount
+          articles: articlesWithCommentCount,
+          loadingArticles: false
         })
       }
     })
@@ -91,7 +72,8 @@ class Articles extends Component {
       const { articlesWithCommentCount } = articles.data;
       if (articlesWithCommentCount) {
         this.setState({
-          articles: articlesWithCommentCount
+          articles: articlesWithCommentCount,
+          loadingArticles: false
         })
       }
     }).catch((err) => this.setState({ err }))
@@ -99,6 +81,13 @@ class Articles extends Component {
 
   voteArticle = (articleId, vote) => {
     api.voteArticle(articleId, vote)
+  }
+
+  fetchTopics = () => {
+    api.getTopics().then(topics => {
+      const { topicDocs } = topics.data;
+      this.setState({ topics: topicDocs })
+    })
   }
 }
 
