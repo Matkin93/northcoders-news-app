@@ -9,17 +9,19 @@ class Login extends Component {
   }
   render() {
     return (
-      <div className="login-box">
-        <h2>Log In</h2>
-        <div className="login-inputs">
-          <form className="login-inputs" onSubmit={this.handleLogIn}>
-            <label className="login-item">Username</label>
-            <input type="text" placeholder="Username" className="login-item" onChange={this.handleUsername} value={this.state.username} />
-            <label className="login-item">Password</label>
-            <input type="password" placeholder="Password" className="login-item" onChange={this.handlePassword} value={this.state.password} />
-            <button type="submit" className="login-button">Log In</button>
-            {this.state.incorrectInput && <div className="invalid-username-password">Incorrect Username or Password</div>}
-          </form>
+      <div className="login-page">
+        <div className="login-box">
+          <h2>Log In</h2>
+          <div className="login-inputs">
+            <form className="login-inputs" onSubmit={this.handleLogIn}>
+              <label className="login-item">Username</label>
+              <input type="text" placeholder="Username" className="login-item" onChange={this.handleUsername} value={this.state.username} />
+              <label className="login-item">Password</label>
+              <input type="password" placeholder="Password" className="login-item" onChange={this.handlePassword} value={this.state.password} />
+              <button type="submit" className="login-button">Log In</button>
+              {this.state.incorrectInput && <div className="invalid-username-password">Incorrect Username or Password</div>}
+            </form>
+          </div>
         </div>
       </div>
     );

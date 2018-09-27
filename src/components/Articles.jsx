@@ -24,7 +24,8 @@ class Articles extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps !== this.props) {
-      this.fetchAllArticles()
+      if (!this.props.match) this.fetchAllArticles();
+      else this.fetchArticlesByTopic(this.props.match.params.topic);
     }
   }
 
@@ -44,39 +45,49 @@ class Articles extends Component {
     }} />
     if (loadingArticles) return <div className="loading">Loading articles...</div>
     else return (
-      <div className="article-page">
-        <div className="articles-list">
-          {sortedArticles.map((article, i) => {
-            return <ArticleCard article={article} key={article._id} />
-          })}
+      <div className="main-page-articles">
+        <div className="article-page">
+          <div className="articles-list">
+            {sortedArticles.map((article, i) => {
+              return <ArticleCard article={article} key={article._id} />
+            })}
+          </div>
+          <SideBox topics={topics} />
         </div>
-        <SideBox topics={topics} />
       </div>
     );
   }
 
   fetchAllArticles = () => {
-    api.getAllArticles().then(articles => {
-      const { articlesWithCommentCount } = articles.data;
-      if (articlesWithCommentCount) {
-        this.setState({
-          articles: articlesWithCommentCount,
-          loadingArticles: false
-        })
-      }
+    this.setState({
+      loadingArticles: true
+    }, () => {
+      api.getAllArticles().then(articles => {
+        const { articlesWithCommentCount } = articles.data;
+        if (articlesWithCommentCount) {
+          this.setState({
+            articles: articlesWithCommentCount,
+            loadingArticles: false
+          })
+        }
+      })
     })
   }
 
   fetchArticlesByTopic = (topic) => {
-    api.getArticlesByTopic(topic).then(articles => {
-      const { articlesWithCommentCount } = articles.data;
-      if (articlesWithCommentCount) {
-        this.setState({
-          articles: articlesWithCommentCount,
-          loadingArticles: false
-        })
-      }
-    }).catch((err) => this.setState({ err }))
+    this.setState({
+      loadingArticles: true
+    }, () => {
+      api.getArticlesByTopic(topic).then(articles => {
+        const { articlesWithCommentCount } = articles.data;
+        if (articlesWithCommentCount) {
+          this.setState({
+            articles: articlesWithCommentCount,
+            loadingArticles: false
+          })
+        }
+      }).catch((err) => this.setState({ err }))
+    })
   }
 
   voteArticle = (articleId, vote) => {

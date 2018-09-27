@@ -8,15 +8,11 @@ class AddComment extends Component {
     loadingComment: false
   }
   render() {
-    console.log(this.props.username)
     return (
       <div className="add-comment-container">
         <div className="add-comment-title">Post comment as {this.props.username}</div>
-        {/* <form onSubmit={this.addComment} > */}
         <textarea value={this.state.input} onChange={this.handleInput} className="add-comment-input" placeholder="Add your comment here!"></textarea>
         <div className="add-comment-bottom"><button type="submit" className="add-comment-button">Comment</button></div>
-        {/* <input type="text" value={this.state.input} onChange={this.handleInput} className="comment-input" placeholder="Add your comment here!" style={{ align: 'top' }} /> */}
-        {/* </form> */}
       </div>
     );
   }

@@ -32,3 +32,5 @@ export const addComment = (articleId, comment) => axios.post(`${DB_URL}/articles
   .catch(err => console.dir(err))
 
 export const deleteComment = (commentId) => axios.delete(`${DB_URL}/comments/${commentId}`)
+
+export const voteComment = (commentId, vote) => axios.patch(`${DB_URL}/comments/${commentId}?vote=${vote}`)
