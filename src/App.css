@@ -79,6 +79,9 @@ a:hover {
 
 .main-content {
   display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
 }
 
 .article-page {
@@ -325,7 +328,6 @@ i.create-icon {
 
 .loading {
   margin-top: 105px;
-  margin-left: 40%;
   background-color: rgb(70, 9, 65);
   padding: 25px;
   color: #97D8B2;
@@ -342,20 +344,28 @@ i.create-icon {
   width: 75px;
 }
 
-
-
+.profile-page {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  align-self: center;
+}
 
 .user-profile-container {
-  display: flex;
+  display: flex; 
   flex-direction: column;
-  justify-content: start;
+  align-content: center;
   align-items: center;
-  margin-top: 150px;
-  background-color: rgb(151, 151, 151);
-  padding: 30px;
-  width: 300px;
-  border: 1px solid rgba(87, 75, 75, 0.829);
+  margin-top: 100px;
   border-radius: 5px;
+  background-color: rgb(70, 9, 65);
+  padding: 25px;
+  width: 250px;
+  height: 250px;
+  color: #97D8B2;
 }
 
 .user-profile-avatar {
@@ -526,46 +536,54 @@ i.create-icon {
 }
 
 
-i.up-arrow {
+.up-arrow .up{
   color: grey;
   font-weight: 900;
   transition: 0.2s;
 }
 
-i.up-arrow:hover {
+.up-arrow:hover .up{
   color: rgb(71, 223, 0);
 }
 
-i.up-arrow:active {
+.up-arrow:active .up{
   transform: scale(1.5);
   transition-duration: 0.05s;
 }
 
-i.up-arrow:disabled {
+.up-arrow:disabled .up{
   color: rgb(71, 223, 0);
   transform: none;
   transition-duration: 0s;
 }
 
-i.down-arrow {
+.down-arrow .down{
   color: grey;
   font-weight: 900;
   transition: 0.2s;
 }
 
-i.down-arrow:hover {
+.down-arrow:hover .down{
   color: red;
 }
 
-i.down-arrow:active {
+.down-arrow:active .down{
   transform: scale(1.5);
   transition-duration: 0.05s;
 }
 
-i.down-arrow:disabled {
+.down-arrow:disabled .down{
   color: red;
   transform: none;
   transition-duration: 0s;
+}
+
+i.up {
+  font-weight: 900;
+}
+
+i.down {
+  font-weight: 900;
 }
 
 i.comment {
@@ -581,6 +599,10 @@ i.dropdown-arrow {
 
 .material-icons{
   color: #97D8B2;
+}
+
+i.person {
+  font-size: 18px;
 }
 
 .page404 {

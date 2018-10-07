@@ -13,12 +13,12 @@ class CreateArticle extends Component {
     api.getTopics().then(({ data }) => {
       this.setState({
         topics: data.topicDocs
-      }, () => console.log(this.state))
+      })
     })
   }
 
   render() {
-    const { title, body, topic, topics } = this.state;
+    const { title, body, topics } = this.state;
     return (
       <div className="create-article">
         <form onSubmit={this.addArticle} className="create-article-input">
@@ -47,7 +47,6 @@ class CreateArticle extends Component {
   }
 
   handleTopic = (e) => {
-    console.log(e)
     this.setState({
       topic: e.target.value
     })
@@ -55,7 +54,6 @@ class CreateArticle extends Component {
 
   addArticle = (e) => {
     e.preventDefault();
-    console.log(e);
     const { _id } = this.props.user;
     const { title, body, topic } = this.state;
 
@@ -65,7 +63,6 @@ class CreateArticle extends Component {
       body: body
     }
     api.postArticle(article, topic)
-      .then(res => console.log(res))
   }
 }
 

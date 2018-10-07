@@ -14,14 +14,14 @@ class VoteButton extends Component {
     else numberColour = 'grey';
     return (
       <span className="vote-component">
-        <button disabled={this.state.voteChange === 1} onClick={() => this.voteArticle(_id, 'up')}>
-          <i className="material-icons up-arrow" disabled={this.state.voteChange === 1}>arrow_upward</i>
+        <button disabled={this.state.voteChange === 1} onClick={() => this.voteArticle(_id, 'up')} className="up-arrow">
+          <i className="material-icons up" disabled={this.state.voteChange === 1}>arrow_upward</i>
         </button>
         <span style={{ color: numberColour }} className="vote-count">
           {votes + this.state.voteChange}
         </span>
-        <button disabled={this.state.voteChange === -1} onClick={() => this.voteArticle(_id, 'down')}>
-          <i className="material-icons down-arrow" disabled={this.state.voteChange === -1}>arrow_downward</i>
+        <button disabled={this.state.voteChange === -1} onClick={() => this.voteArticle(_id, 'down')} className="down-arrow">
+          <i className="material-icons down" disabled={this.state.voteChange === -1}>arrow_downward</i>
         </button>
       </span>
     );

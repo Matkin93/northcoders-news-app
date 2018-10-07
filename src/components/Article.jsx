@@ -46,7 +46,7 @@ class Article extends Component {
         <FullArticleCard upperCaseTopic={upperCaseTopic} article={this.state.article} />
         {loadingComments || loadingArticle ? <div className="loading">Loading Comments</div> : <div>
           <div>
-            <AddComment articleId={article._id} userId={this.props.user} username={this.props.username} addCommentToState={this.addCommentToState} />
+            {this.props.user ? <AddComment articleId={article._id} userId={this.props.user} username={this.props.username} addCommentToState={this.addCommentToState} /> : <div>login to post a comment</div>}
           </div>
           <CommentsList sortedComments={sortedComments} deleteComment={this.deleteComment} user={this.props.user} />
         </div>
@@ -84,8 +84,7 @@ class Article extends Component {
   }
 
   deleteComment = (commentId) => {
-    console.log(commentId)
-    api.deleteComment(commentId).then(res => console.log(res))
+    api.deleteComment(commentId)
   }
 }
 

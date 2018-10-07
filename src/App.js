@@ -42,7 +42,7 @@ class App extends Component {
               </div>
               <div></div>
               {username ? <div className="header-link">
-                <i className="material-icons">person_outline</i>
+                <i className="material-icons person">person_outline</i>
                 <Link to="/profile">{username}</Link>
                 <div className="dropdown">
                   <span>

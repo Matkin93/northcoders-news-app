@@ -10,18 +10,18 @@ class VoteButtonComment extends Component {
     const { _id, votes } = comment;
     let numberColour = '';
     if (comment.votes < 0) numberColour = 'red'
-    else if (comment.votes > 0) numberColour = 'rgb(0, 221, 0)'
+    else if (comment.votes > 0) numberColour = 'rgb(0, 221, 0)';
     else numberColour = 'grey';
     return (
       <span className="vote-component">
         <button disabled={this.state.voteChange === 1} onClick={() => this.voteComment(_id, 'up')}>
-          <i className="material-icons up-arrow" disabled={this.state.voteChange === 1}>arrow_upward</i>
+          <i className="material-icons up-arrow">arrow_upward</i>
         </button>
         <span style={{ color: numberColour }} className="vote-count">
           {votes + this.state.voteChange}
         </span>
         <button disabled={this.state.voteChange === -1} onClick={() => this.voteComment(_id, 'down')}>
-          <i className="material-icons down-arrow" disabled={this.state.voteChange === -1}>arrow_downward</i>
+          <i className="material-icons down-arrow">arrow_downward</i>
         </button>
       </span>
     );

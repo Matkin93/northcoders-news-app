@@ -15,7 +15,6 @@ class User extends Component {
 
   render() {
     const { avatar_url, username, name } = this.state.user;
-    console.log(avatar_url);
     return (
       <div className="user-profile-container">
         <img src={avatar_url} alt="user-avatar" className="user-profile-avatar" onError={(e) => { e.target.src = profileImg }} />

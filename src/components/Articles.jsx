@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import * as api from '../api';
-import { Link, Redirect } from 'react-router-dom';
-import moment from 'moment';
-import VoteButton from './VoteButton';
+import { Redirect } from 'react-router-dom';
 import SideBox from './SideBox';
 import ArticleCard from './ArticleCard';
 
