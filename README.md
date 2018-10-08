@@ -1,8 +1,8 @@
 # Northcoders News App
 
+Northcoders News is a user curated news aggregate site in the style of reddit, users can vote on articles and comments while being able to post their own. Comments the user has added can be deleted if the user chooses to do so.
 
-
-Link to running app: https://northcoders-news-matt-atkin.herokuapp.com/
+To see the site in action, head here: https://northcoders-news-matt-atkin.herokuapp.com/
 
 ### How to install:
 ```
@@ -15,7 +15,13 @@ npm install
 npm start
 ```
 
+### Built With
+
+Node.js
+React
+Express
+Axios
 
 ### Please Note:
 
-No user logged in by default, use happyamy2016 as username, no password functionality implemented yet.
+User happyamy2016 is logged in by default, no password functionality implemented yet.
